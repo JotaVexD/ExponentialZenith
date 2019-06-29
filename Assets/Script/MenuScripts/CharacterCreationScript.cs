@@ -109,7 +109,7 @@ public class CharacterCreationScript : MonoBehaviour
 
     public void changeFormat(string raceName){
         if(raceName == "Human"){
-            player.GetComponent<SpriteRenderer>().sprite = human;
+            player.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Player/Races/Human");
         }
     }
 

@@ -185,7 +185,8 @@ public class ClassSelectionScript : MonoBehaviour
     }
 
     public void joinGame(){
-        CharConfig.Instance.charData.name = activeCharacterData.name;
+        CharConfig.Instance.charData.username = activeCharacterData.username;
+        CharConfig.Instance.charData.nameChar = activeCharacterData.name;
         CharConfig.Instance.charData.race = activeCharacterData.race;
         CharConfig.Instance.charData.classe = activeCharacterData.classe;
         CharConfig.Instance.charData.level = activeCharacterData.level;

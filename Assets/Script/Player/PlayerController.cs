@@ -14,6 +14,7 @@ public class PlayerController : NetworkBehaviour
     
     // stats and skill levels
     public float speed;
+    public string nameOfPlayer;
     public const int m_MaxHealth = 100;
     private Rigidbody2D _rigidBody;
 
@@ -23,11 +24,10 @@ public class PlayerController : NetworkBehaviour
     //Chest Panel
     public GameObject chestPanel;
     public GameObject Chest;
-    public GameObject canvas;
+    public GameObject MainHud;
     
     //Get Chest Itens and Show
     [SerializeField] Transform itemsParentChestSlot;
-    public List<Item> itemsIn;
     [SerializeField] SlotChests[] itemChest;
     public bool InventoryOpen = false;
     private bool openChestOneTime;
@@ -45,11 +45,11 @@ public class PlayerController : NetworkBehaviour
             itemChest = itemsParentChestSlot.GetComponentsInChildren<SlotChests>();
         }
     }
-
     void Start() {
         _rigidBody = GetComponent<Rigidbody2D>();
-        chestPanel.SetActive(false);
+        nameOfPlayer = CharConfig.Instance.charData.nameChar;
     }
+
 
     void FixedUpdate() {
 
@@ -57,6 +57,25 @@ public class PlayerController : NetworkBehaviour
             return;
         }
 
+        if(this.transform.Find("HUD") != null){
+            MainHud = this.transform.Find("HUD").gameObject.transform.Find("Character HUD").gameObject;
+            CharacterPanel = MainHud.transform.Find("Character Inv && Stats").gameObject;
+            inventory = CharacterPanel.transform.Find("Inventory").gameObject.GetComponent<Inventory>();
+            chestPanel = MainHud.transform.Find("ChestPanel").gameObject;
+            itemsParentChestSlot = MainHud.transform.Find("ChestPanel");
+
+            GetComponent<Character>().MainHud = MainHud;
+            GetComponent<Character>().CharacterPanel =  GetComponent<Character>().MainHud.transform.Find("Character Inv && Stats").gameObject;
+            GetComponent<Character>().ChestOpen =  GetComponent<Character>().MainHud.transform.Find("ChestPanel").gameObject;
+        }
+        
+
+        this.name = CharConfig.Instance.charData.nameChar;
+        
+        if(itemsParentChestSlot != null){
+            itemChest = itemsParentChestSlot.GetComponentsInChildren<SlotChests>();
+        }
+        
         this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Player/Races/"+CharConfig.Instance.charData.race);
         // Change Color by class 
         if(CharConfig.Instance.charData.classe == "Guardian"){
@@ -67,7 +86,8 @@ public class PlayerController : NetworkBehaviour
             this.GetComponent<SpriteRenderer>().color = new Color(0.9372f,0.8274f,0f);            
         }
 
-        canvas.SetActive(true);
+        nameOfPlayer = CharConfig.Instance.charData.nameChar;
+
         var mousePosition = Input.mousePosition;
         mousePosition.z = 10.0f;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
@@ -96,7 +116,6 @@ public class PlayerController : NetworkBehaviour
             InventoryOpen = false;
         }
     }
-
     
 
     private void OnTriggerStay2D(Collider2D other) {

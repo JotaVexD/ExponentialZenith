@@ -18,6 +18,7 @@ public class Chest : MonoBehaviour
         {
 
             slotChest[i].OnRightClickEvent += OnRightClickEvent;
+            
         }
     }
 

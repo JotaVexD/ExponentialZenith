@@ -5,8 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Kryz.CharacterStats;
+using Mirror;
 
-public class Character : MonoBehaviour
+public class Character : NetworkBehaviour
 {
     public CharacterStat Strength;
     public CharacterStat Agility;
@@ -25,6 +26,8 @@ public class Character : MonoBehaviour
 
     private ItemSlots draggedSlot;
     public GameObject ChestOpen;
+    public GameObject MainHud;
+    public GameObject CharacterPanel;
 
     private void OnValidate(){
         if(itemTooltip == null){
@@ -33,23 +36,24 @@ public class Character : MonoBehaviour
     }
 
     private void Start(){
-        Strength.BaseValue = CharConfig.Instance.charData.STR;
-        Agility.BaseValue = CharConfig.Instance.charData.AGI;
-        Intelligence.BaseValue = CharConfig.Instance.charData.INT;
-        Vitality.BaseValue = CharConfig.Instance.charData.VIT;
-        Dexterity.BaseValue = CharConfig.Instance.charData.DEX;
-        Luck.BaseValue = CharConfig.Instance.charData.LUK;
-        statPanel.UpdateStatValues();
+        
+
     }
-
-
-    private void Awake()
-    {
-        statPanel.SetStats(Strength,Agility,Intelligence,Vitality,Dexterity,Luck);
-        statPanel.UpdateStatValues();
-
+    
+    private void FixedUpdate() {
         // Setup Events:
         // Right Click
+        if(CharacterPanel == null){
+            return;
+        }
+
+        inventory = CharacterPanel.transform.Find("Inventory").gameObject.GetComponent<Inventory>();
+        itemTooltip = CharacterPanel.transform.Find("ItemTooltip").gameObject.GetComponent<ItemTooltip>();
+        equipmentPanel = CharacterPanel.transform.Find("EquipmentPanel").gameObject.GetComponent<EquipmentPanel>();
+        statPanel = CharacterPanel.transform.Find("StatPanel").gameObject.GetComponent<StatPanel>();
+        draggableItem = CharacterPanel.transform.Find("Image").gameObject.GetComponent<Image>();
+        chest = MainHud.transform.Find("ChestPanel").gameObject.GetComponent<Chest>();
+
         inventory.OnRightClickEvent += Equip;
         chest.OnRightClickEvent += GoToInventory;
         equipmentPanel.OnRightClickEvent += UnEquip;
@@ -71,6 +75,17 @@ public class Character : MonoBehaviour
         //Drop
         inventory.OnDropEvent += Drop;
         equipmentPanel.OnDropEvent += Drop;
+
+
+        Strength.BaseValue = CharConfig.Instance.charData.STR;
+        Agility.BaseValue = CharConfig.Instance.charData.AGI;
+        Intelligence.BaseValue = CharConfig.Instance.charData.INT;
+        Vitality.BaseValue = CharConfig.Instance.charData.VIT;
+        Dexterity.BaseValue = CharConfig.Instance.charData.DEX;
+        Luck.BaseValue = CharConfig.Instance.charData.LUK;
+
+        statPanel.SetStats(Strength,Agility,Intelligence,Vitality,Dexterity,Luck);
+        statPanel.UpdateStatValues();
     }
 
     private void Equip(ItemSlots itemSlot){
@@ -101,7 +116,7 @@ public class Character : MonoBehaviour
     private void BeginDrag(ItemSlots itemSlot){
         if(itemSlot.Item != null){
             draggedSlot = itemSlot;
-            // draggableItem.enabled = true;
+            draggableItem.enabled = true;
             draggableItem.sprite = itemSlot.Item.Icon;
             draggableItem.transform.position =  Input.mousePosition;
         }
@@ -109,7 +124,7 @@ public class Character : MonoBehaviour
 
     private void EndDrag(ItemSlots itemSlot){
         draggedSlot = null;
-        // draggableItem.enabled = false;
+        draggableItem.enabled = false;
     }
 
     private void Drag(ItemSlots itemSlot){
