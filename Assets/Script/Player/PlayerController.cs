@@ -17,6 +17,7 @@ public class PlayerController : NetworkBehaviour
     public string nameOfPlayer;
     public const int m_MaxHealth = 100;
     private Rigidbody2D _rigidBody;
+    private int DoOneTime = 0;
 
     //Inventory Panel
     public GameObject CharacterPanel;
@@ -52,11 +53,9 @@ public class PlayerController : NetworkBehaviour
 
 
     void FixedUpdate() {
-
         if(!isLocalPlayer){
             return;
         }
-
         if(this.transform.Find("HUD") != null){
             MainHud = this.transform.Find("HUD").gameObject.transform.Find("Character HUD").gameObject;
             CharacterPanel = MainHud.transform.Find("Character Inv && Stats").gameObject;
@@ -67,8 +66,13 @@ public class PlayerController : NetworkBehaviour
             GetComponent<Character>().MainHud = MainHud;
             GetComponent<Character>().CharacterPanel =  GetComponent<Character>().MainHud.transform.Find("Character Inv && Stats").gameObject;
             GetComponent<Character>().ChestOpen =  GetComponent<Character>().MainHud.transform.Find("ChestPanel").gameObject;
+            if(DoOneTime == 0){
+                CharacterPanel.SetActive(true);
+                inventory.GetFromDB();
+                DoOneTime = 1;
+            }
         }
-        
+         
 
         this.name = CharConfig.Instance.charData.nameChar;
         
@@ -109,9 +113,11 @@ public class PlayerController : NetworkBehaviour
         }
 
         if(Input.GetKeyDown(KeyCode.I) && InventoryOpen == false){
+            // CharacterPanel.GetComponent<InventoryManager>().inventoryEnable(0);
             CharacterPanel.SetActive(true);
             InventoryOpen = true;
         }else if(Input.GetKeyDown(KeyCode.I) && InventoryOpen == true){
+            // CharacterPanel.GetComponent<InventoryManager>().inventoryEnable(1);
             CharacterPanel.SetActive(false);
             InventoryOpen = false;
         }
@@ -140,8 +146,9 @@ public class PlayerController : NetworkBehaviour
         }
         if(openChestOneTime == true){
             CharacterPanel.SetActive(false);
+            InventoryOpen = false;
             chestPanel.SetActive(false);
-            Chest = null;
+            Chest = null;   
             GameObject ChestOpen = GetComponent<Character>().ChestOpen;
             ChestOpen = null;
             for(int i = 0; i < itemChest.Length; i++){

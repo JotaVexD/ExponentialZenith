@@ -36,7 +36,10 @@ public class ItemTooltip : MonoBehaviour
 
         gameObject.SetActive(true);
 
-        nameText.text = item.ItemName;
+        string aux = item.ItemName;
+        string[] name2 = aux.Split('_');
+
+        nameText.text = name2[0];
         slotTypeText.text = item.EquipmentType.ToString();
 
         sb.Length = 0;

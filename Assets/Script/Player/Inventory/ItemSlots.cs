@@ -20,7 +20,7 @@ public class ItemSlots : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     private Color normalColor = Color.white;
     private Color disabledColor = new Color(0,0,0,0);
 
-    private Item _item;
+    public Item _item;
     public Item Item{
         get{return _item; }
         set{

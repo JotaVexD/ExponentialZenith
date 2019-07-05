@@ -91,7 +91,7 @@ public class Character : NetworkBehaviour
     private void Equip(ItemSlots itemSlot){
         EquippableItem equippableItem = itemSlot.Item as EquippableItem;
         if(equippableItem != null){
-            Equip(equippableItem);
+            Equip(equippableItem,0);
         }
     }
 
@@ -170,25 +170,34 @@ public class Character : NetworkBehaviour
         }
     }
 
-    public void Equip(EquippableItem item)
+    public void Equip(EquippableItem item,int checkDB)
     {
-        if(inventory.RemoveItem(item))
-        {
-            EquippableItem previousItem;
-            if(equipmentPanel.AddItem(item,out previousItem))
+        if(checkDB == 0){
+            if(inventory.RemoveItem(item))
             {
-                if(previousItem != null)
+                EquippableItem previousItem;
+                if(equipmentPanel.AddItem(item,out previousItem,1))
                 {
-                    inventory.AddItem(previousItem);
-                    previousItem.Unequip(this);
+                    if(previousItem != null)
+                    {
+                        inventory.AddItem(previousItem);
+                        previousItem.Unequip(this);
+                        statPanel.UpdateStatValues();
+                    }
+                    item.Equip(this);
                     statPanel.UpdateStatValues();
                 }
+                else
+                {
+                    inventory.AddItem(item);
+                }
+            }
+        }else{
+            EquippableItem previousItem;
+            if(equipmentPanel.AddItem(item,out previousItem,0))
+            {
                 item.Equip(this);
                 statPanel.UpdateStatValues();
-            }
-            else
-            {
-                inventory.AddItem(item);
             }
         }
     }

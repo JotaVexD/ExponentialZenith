@@ -62,7 +62,10 @@ public class StatTooltip : MonoBehaviour
         {
             StatModifier mod = stat.StatModifiers[i];
 
-            sb.Append(((Item)mod.Source).name);
+            string aux = ((Item)mod.Source).name;
+            string[] name2 = aux.Split('_');
+
+            sb.Append(name2[1]);
             sb.Append(": ");
 
             if (mod.Value > 0) {

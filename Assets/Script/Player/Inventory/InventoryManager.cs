@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class InventoryManager : MonoBehaviour
         if(inventory.RemoveItem(item))
         {
             EquippableItem previousItem;
-            if(equipmentPanel.AddItem(item,out previousItem))
+            if(equipmentPanel.AddItem(item,out previousItem,1))
             {
                 if(previousItem != null)
                 {

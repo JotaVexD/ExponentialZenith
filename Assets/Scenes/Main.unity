@@ -443,6 +443,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUD
       objectReference: {fileID: 0}
+    - target: {fileID: 6048826870484132017, guid: ac2c1d16facf8004388cb4f7af4c2c0c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5384106878553866874, guid: ac2c1d16facf8004388cb4f7af4c2c0c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1368,7 +1373,94 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 80
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 718018442171797625, guid: ac2c1d16facf8004388cb4f7af4c2c0c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 95.20001
+      objectReference: {fileID: 0}
+    - target: {fileID: 718018442171797625, guid: ac2c1d16facf8004388cb4f7af4c2c0c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -40.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1814424041817901295, guid: ac2c1d16facf8004388cb4f7af4c2c0c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 522256248532175879, guid: ac2c1d16facf8004388cb4f7af4c2c0c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.2241211
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425622616171750325, guid: ac2c1d16facf8004388cb4f7af4c2c0c,
+        type: 3}
+      propertyPath: startingEquipableItems.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425622616171750325, guid: ac2c1d16facf8004388cb4f7af4c2c0c,
+        type: 3}
+      propertyPath: startingEquipableItems.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: debd68f1a5d26234881c2fad779a0cc4,
+        type: 2}
+    - target: {fileID: 7630860350049142820, guid: ac2c1d16facf8004388cb4f7af4c2c0c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326258925783014308, guid: ac2c1d16facf8004388cb4f7af4c2c0c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2249782789786418090, guid: ac2c1d16facf8004388cb4f7af4c2c0c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269965111482233935, guid: ac2c1d16facf8004388cb4f7af4c2c0c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 360946130692658197, guid: ac2c1d16facf8004388cb4f7af4c2c0c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4490368040403269551, guid: ac2c1d16facf8004388cb4f7af4c2c0c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 702490696502236823, guid: ac2c1d16facf8004388cb4f7af4c2c0c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 125564972268389412, guid: ac2c1d16facf8004388cb4f7af4c2c0c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7687104370402959841, guid: ac2c1d16facf8004388cb4f7af4c2c0c,
+        type: 3}
+      propertyPath: startingItems.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 486961628663583244, guid: ac2c1d16facf8004388cb4f7af4c2c0c,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 486961628663583244, guid: ac2c1d16facf8004388cb4f7af4c2c0c,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6048826870484132017, guid: ac2c1d16facf8004388cb4f7af4c2c0c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ac2c1d16facf8004388cb4f7af4c2c0c, type: 3}
 --- !u!1001 &1797275192
 PrefabInstance:
